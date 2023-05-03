@@ -1843,7 +1843,8 @@ static Bool dis_RV64M(/*MB_OUT*/ DisResult* dres,
                break;
             case 0b110:
                expr = unop(Iop_64HIto32, binop(Iop_DivModS64to32,
-                                               getIReg64(rs1), getIReg32(rs2)));
+                                               unop(Iop_32Sto64, getIReg32(rs1)),
+                                               getIReg32(rs2)));
                break;
             case 0b111:
                expr = unop(Iop_64HIto32, binop(Iop_DivModU64to32,
